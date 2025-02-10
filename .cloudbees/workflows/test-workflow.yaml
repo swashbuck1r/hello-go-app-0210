@@ -1,0 +1,21 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: Test workflow
+on:
+  push:
+    branches:
+      - "**"
+  workflow_dispatch:
+    inputs:
+      Reason:
+        type: string
+        default: Whatever
+        required: true
+jobs:
+  build:
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: |
+          echo "hello world"
